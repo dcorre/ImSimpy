@@ -126,3 +126,6 @@ ImSimpy/data/psf/
 
 # Exclude path to configfiles
 ImSimpy/configFiles/
+
+# Exclude path to outputs images 
+ImSimpy/images/
