@@ -1,0 +1,7 @@
+GRB_name;trigger_sat;redshift;Tstart;Tend;unit_time;mag;err_mag;filter;mJy;err_mJy;ID_telescope
+091020;Swift;1.71;1153;1173;s;17.27;0.15;B;0;0;131
+091020;Swift;1.71;0.215848;0.215850;d;20.78;0.10;B;0;0;26
+091020;Swift;1.71;0.219888;0.219890;d;20.71;0.08;B;0;0;26
+091020;Swift;1.71;0.223927;0.223929;d;20.72;0.08;B;0;0;26
+
+

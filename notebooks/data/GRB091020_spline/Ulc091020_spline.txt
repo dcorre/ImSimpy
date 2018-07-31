@@ -1,0 +1,2 @@
+GRB_name 	 redshift 	 mid_time (s) 	 mid_time- (s) 	 mid_time+ (s) 	 flux [erg.cm-2.s-1 (X) or mJy (opt/IR, radio)] 	 flux_err 	 type of point (detection,extrap,UL) 	 filter 
+091020 	 0.000000 	 716.968376 	 716.143410 	 717.794291 	 2.714430e-01 	 3.719351e-02 	 3 	 U 
