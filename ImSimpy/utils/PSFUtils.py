@@ -185,10 +185,14 @@ def createPSF(filename='moffat_1024_J_s50.fits',PSF_type='moffat',imsize=[1025,1
         plt.colorbar()
         plt.show()
 
+    mask = Z2 < 0
+    Z2[mask] = 0
+
     #create a new FITS file
     hdu = fits.PrimaryHDU()
     #new image HDU
     hdu.data=Z2/np.sum(Z2)
+
     #convert to unsigned 16bit int if requested
     if unsigned16bit:
         hdu.scale('int16', '', bzero=32768)
@@ -295,6 +299,10 @@ def convolvePSF(filename1='moffat_1024_J_s30.fits',filename2='PSF_J_ideal.fits',
        data3 = convolution(data1,data2,allow_huge=True)
    """
    data3 = convolution(data1,data2,mode='same')
+
+   mask = data3 < 0
+   data3[mask] = 0
+
    #Renormalisation
    data3 /= np.sum(data3)
 
