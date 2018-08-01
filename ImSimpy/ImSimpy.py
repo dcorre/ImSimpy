@@ -175,17 +175,17 @@ class ImageSimulator():
         except:
             self.digiNoise = False
         try:
-            val=self.config['darkCurrent']
-            if val.lower() == 'yes': self.darkCurrent = True
-            else: self.darkCurrent = False
-        except:
-            self.darkCurrent = False
-        try:
             val=self.config['background']
             if val.lower() == 'yes': self.background = True
             else: self.background = False
         except:
             self.background = False
+        try:
+            val=self.config['darkCurrent']
+            if val.lower() == 'yes': self.darkCurrent = True
+            else: self.darkCurrent = False
+        except:
+            self.darkCurrent = False
         try:
             val=self.config['shutterOpen']
             if val.lower() == 'yes': self.shutterOpen = True
@@ -1170,15 +1170,15 @@ class ImageSimulator():
             print ("\tApply Shot noise")
             self.applyShotNoise()
 
-        if self.darkCurrent:
-            #if self.config['verbose'] == 'True': print ("Add dark current")
-            print ("\tAdd dark current")
-            self.applyDarkCurrent()
-
         if self.background:
             #if self.config['verbose'] == 'True': print ("Add Sky background")
             print ("\tAdd Sky background")
             self.applySkyBackground()
+
+        if self.darkCurrent:
+            #if self.config['verbose'] == 'True': print ("Add dark current")
+            print ("\tAdd dark current")
+            self.applyDarkCurrent()
 
         if self.Vignetting:
             #if self.config['verbose'] == 'True': print ("Add Vignetting")
