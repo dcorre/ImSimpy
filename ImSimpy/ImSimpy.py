@@ -13,7 +13,7 @@ Contact Information
 mail: david.corre@lam.fr
 
 """
-import os, sys, datetime, math
+import os, sys, datetime, math, shutil
 from collections import OrderedDict
 import hjson
 import scipy
@@ -25,6 +25,7 @@ import numexpr as ne
 from ImSimpy.utils.generateCalib import DarkCurrent
 from ImSimpy.utils import PSFUtils
 from scipy.signal import fftconvolve
+import imp
 
 convolution = fftconvolve
 
@@ -34,15 +35,22 @@ class ImageSimulator():
 
     """
 
-    def __init__(self, path=os.getenv('ImSimpy_DIR')+'/ImSimpy',configFile=os.getenv('ImSimpy_DIR')+'/ImSimpy/configFiles/default_input.hjson',name_telescope='default',seed=None, debug=False,random=False):
+    def __init__(self, configFile='default_input.hjson',name_telescope='default',seed=None, debug=False,random=False):
         """
         Class Constructor.
 
         :configFile : name of the cofig file 
         :seed: value used to set the random number generator (default: None --> use current time).
         """
+        try:
+            _, path, _ = imp.find_module('ImSimpy')
+        except:
+            print ('path to pyETC can not be found.')
+
+
         self.path = path
-        self.configfile = configFile
+        self.configfile_nopath = configFile
+        self.configfile = self.path + '/config/' + configFile
         self.name_telescope = name_telescope
 
         if seed != None:
@@ -90,9 +98,17 @@ class ImageSimulator():
 
         try:
            from pyETC.pyETC import etc
+           try:
+               _, path_etc, _ = imp.find_module('pyETC')
+           except:
+               print ('path to pyETC can not be found.')
         except ValueError:
            print ('Package ETC not found, you have to install it')
-        if config_type =='file': etc_info=etc(configFile=self.configfile, config_type=config_type,name_telescope=self.name_telescope)
+
+        # copy config file to ETC config folder
+        shutil.copy(self.configfile, path_etc+'/config/'+self.configfile_nopath)
+
+        if config_type =='file': etc_info=etc(configFile=self.configfile_nopath, config_type=config_type,name_telescope=self.name_telescope)
         elif config_type =='data': etc_info=etc(configFile=self.config, config_type=config_type,name_telescope=self.name_telescope)
         etc_info.sim()
         #Update the config file 

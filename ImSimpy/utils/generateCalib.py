@@ -8,11 +8,15 @@ from mpl_toolkits.mplot3d import Axes3D
 from matplotlib import cm
 import numpy as np
 from astropy.io import fits
+import imp
+
+_, path, _ = imp.find_module('ImSimpy')
+
 
 __version__ = 1.0
 
 
-def Vignetting(filename=os.getenv('ImSimpy_DIR')+'/ImSimpy/data/Vignetting/Vignetting_vis.fits',Type='quad', floor=1, xsize=4096, ysize=4096,create3Dplot=False,rstride=100,cstride=100):
+def Vignetting(filename=path+'/data/Vignetting/Vignetting_vis.fits',Type='quad', floor=1, xsize=4096, ysize=4096,create3Dplot=False,rstride=100,cstride=100):
     """
 
     """
@@ -62,7 +66,7 @@ def Vignetting(filename=os.getenv('ImSimpy_DIR')+'/ImSimpy/data/Vignetting/Vigne
     hdu.writeto(filename,overwrite=True)
 
 
-def Offset(filename=os.getenv('ImSimpy_DIR')+'/ImSimpy/data/Offset/Offset_vis.fits',Type='constant', floor=1000, xsize=4096, ysize=4096):
+def Offset(filename=path+'/data/Offset/Offset_vis.fits',Type='constant', floor=1000, xsize=4096, ysize=4096):
     """
 
     """
@@ -100,7 +104,7 @@ def Offset(filename=os.getenv('ImSimpy_DIR')+'/ImSimpy/data/Offset/Offset_vis.fi
 
     hdu.writeto(filename,overwrite=True)
 
-def GainMap(filename=os.getenv('ImSimpy_DIR')+'/ImSimpy/data/GainMap/Gain_vis.fits',Type='constant', mean=1, std=0.05,Nampl=32,xsize=4096, ysize=4096):
+def GainMap(filename=path+'/data/GainMap/Gain_vis.fits',Type='constant', mean=1, std=0.05,Nampl=32,xsize=4096, ysize=4096):
     """
 
     """
@@ -145,7 +149,7 @@ def GainMap(filename=os.getenv('ImSimpy_DIR')+'/ImSimpy/data/GainMap/Gain_vis.fi
     hdu.writeto(filename,overwrite=True)
 
 
-def DarkCurrent(filename=os.getenv('ImSimpy_DIR')+'/ImSimpy/data/DarkCurrent/DarkCurrent_vis.fits',Type='gaussian', mean=0.006,xsize=4096, ysize=4096,texp=20):
+def DarkCurrent(filename=path+'/data/DarkCurrent/DarkCurrent_vis.fits',Type='gaussian', mean=0.006,xsize=4096, ysize=4096,texp=20):
     """
 
     """
@@ -173,7 +177,7 @@ def DarkCurrent(filename=os.getenv('ImSimpy_DIR')+'/ImSimpy/data/DarkCurrent/Dar
 
     hdu.writeto(filename,overwrite=True)
 
-def Bias(filename=os.getenv('ImSimpy_DIR')+'/ImSimpy/data/Bias/Bias_vis.fits',BiasType='constant',numdata=4096, floor=1000, xsize=4096, ysize=4096):
+def Bias(filename=path+'/data/Bias/Bias_vis.fits',BiasType='constant',numdata=4096, floor=1000, xsize=4096, ysize=4096):
     """
 
     """
@@ -212,7 +216,7 @@ def Bias(filename=os.getenv('ImSimpy_DIR')+'/ImSimpy/data/Bias/Bias_vis.fits',Bi
     hdu.writeto(filename,overwrite=True)
 
 
-def Flat(filename=os.getenv('ImSimpy_DIR')+'/ImSimpy/data/FlatField/FlatField_vis.fits',FlatFieldType='quad',numdata=4096, floor=1e5, xsize=4096, ysize=4096,create3Dplot=False,rstride=100,cstride=100):
+def Flat(filename=path+'/data/FlatField/FlatField_vis.fits',FlatFieldType='quad',numdata=4096, floor=1e5, xsize=4096, ysize=4096,create3Dplot=False,rstride=100,cstride=100):
     """
       an idealised flat field surface representing the calibration unit flux output
     """
@@ -262,20 +266,20 @@ def Flat(filename=os.getenv('ImSimpy_DIR')+'/ImSimpy/data/FlatField/FlatField_vi
     hdu.writeto(filename,overwrite=True)
 
     
-def makeCalibs(output_dir='Calibration/COLIBRI/',suffix=['_vis','_nir'],xsize=[4096,2048],ysize=[4096,2048],offset=[1000,500],Type_vig=['quad','quad'],Type_gain=['constant','random'],mean_gain=[1.5,1.3],std_gain=[None,0.05],Nampl=[1,32]):
+def makeCalibs(output_dir=path+'Calibration/COLIBRI/',suffix=['_vis','_nir'],xsize=[4096,2048],ysize=[4096,2048],offset=[1000,500],Type_vig=['quad','quad'],Type_gain=['constant','random'],mean_gain=[1.5,1.3],std_gain=[None,0.05],Nampl=[1,32]):
     # Make Offset, Vignetting and Gain map
     from ImSimpy.utils.generateCalib import Offset, Vignetting, GainMap
     
     for i in range(len(suffix)):
-        Offset(filename=os.getenv('ImSimpy_DIR')+'/ImSimpy/data/Offset/%s/Offset%s.fits' % (output_dir,suffix[i]),xsize=xsize[i], ysize=ysize[i],floor=offset[i])
+        Offset(filename=path+'/data/Offset/%s/Offset%s.fits' % (output_dir,suffix[i]),xsize=xsize[i], ysize=ysize[i],floor=offset[i])
 
-        Vignetting(filename=os.getenv('ImSimpy_DIR')+'/ImSimpy/data/Vignetting/%s/Vignetting%s.fits' % (output_dir,suffix[i]),Type=Type_vig[i],floor=1,xsize=xsize[i], ysize=ysize[i])
+        Vignetting(filename=path+'/data/Vignetting/%s/Vignetting%s.fits' % (output_dir,suffix[i]),Type=Type_vig[i],floor=1,xsize=xsize[i], ysize=ysize[i])
 
-        GainMap(filename=os.getenv('ImSimpy_DIR')+'/ImSimpy/data/GainMap/%s/Gain%s.fits' % (output_dir,suffix[i]),Type=Type_gain[i],mean=mean_gain[i],std=std_gain[i],Nampl=Nampl[i],xsize=xsize[i],ysize=ysize[i])
+        GainMap(filename=path+'/data/GainMap/%s/Gain%s.fits' % (output_dir,suffix[i]),Type=Type_gain[i],mean=mean_gain[i],std=std_gain[i],Nampl=Nampl[i],xsize=xsize[i],ysize=ysize[i])
     
 
     
-def makeFlats(configFile=os.getenv('ImSimpy_DIR')+'/ImSimpy/configFiles/Flat.hjson',name_telescope='colibri',output_dir='Calibration/COLIBRI/',bands=['g','r','i','z','J','H'],Texp=30,Nexp=10,suffix=['_vis','_nir']):
+def makeFlats(configFile='/config/Flat.hjson',name_telescope='colibri',output_dir='Calibration/COLIBRI/',bands=['g','r','i','z','J','H'],Texp=30,Nexp=10,suffix=['_vis','_nir']):
 
     from ImSimpy.ImSimpy import ImageSimulator
     
@@ -325,7 +329,7 @@ def makeFlats(configFile=os.getenv('ImSimpy_DIR')+'/ImSimpy/configFiles/Flat.hjs
             GFT_IS.config['output']='%s/Flat_%s_%d.fits' % (output_dir,band,N)
             GFT_IS.simulate('data')
             
-def makeDarks(configFile=os.getenv('ImSimpy_DIR')+'/ImSimpy/configFiles/Dark.hjson',name_telescope='colibri',output_dir='Calibration/COLIBRI/',bands=['g','r','i','z','J','H'],Texp=30,Nexp=10,suffix=['_vis','_nir']):
+def makeDarks(configFile='/config/Dark.hjson',name_telescope='colibri',output_dir='Calibration/COLIBRI/',bands=['g','r','i','z','J','H'],Texp=30,Nexp=10,suffix=['_vis','_nir']):
 
     from ImSimpy.ImSimpy import ImageSimulator
     
@@ -375,7 +379,7 @@ def makeDarks(configFile=os.getenv('ImSimpy_DIR')+'/ImSimpy/configFiles/Dark.hjs
             GFT_IS.config['output']='%s/Dark_%s_%ss_%d.fits' % (output_dir,band,Texp,N)
             GFT_IS.simulate('data')
             
-def makeBias(configFile=os.getenv('ImSimpy_DIR')+'/ImSimpy/configFiles/Bias.hjson',name_telescope='colibri',output_dir='Calibration/COLIBRI/',bands=['g','r','i','z','J','H'],Texp=0.1,Nexp=10,suffix=['_vis','_nir']):
+def makeBias(configFile='/config/Bias.hjson',name_telescope='colibri',output_dir='Calibration/COLIBRI/',bands=['g','r','i','z','J','H'],Texp=0.1,Nexp=10,suffix=['_vis','_nir']):
 
     from ImSimpy.ImSimpy import ImageSimulator
     
@@ -427,20 +431,20 @@ def makeBias(configFile=os.getenv('ImSimpy_DIR')+'/ImSimpy/configFiles/Bias.hjso
     
 if __name__ == '__main__':
     # Visible
-    Vignetting(filename=os.getenv('ImSimpy_DIR')+'/ImSimpy/data/Vignetting/Vignetting_vis.fits',floor=1,xsize=4096, ysize=4096)
-    Offset(filename=os.getenv('ImSimpy_DIR')+'/ImSimpy/data/Offset/Offset_vis.fits',xsize=4096, ysize=4096)
-    GainMap(filename=os.getenv('ImSimpy_DIR')+'/ImSimpy/data/GainMap/Gain_vis.fits',Type='constant',mean=1.5,xsize=4096,ysize=4096)
+    Vignetting(filename=path+'/data/Vignetting/Vignetting_vis.fits',floor=1,xsize=4096, ysize=4096)
+    Offset(filename=path+'/data/Offset/Offset_vis.fits',xsize=4096, ysize=4096)
+    GainMap(filename=path+'/data/GainMap/Gain_vis.fits',Type='constant',mean=1.5,xsize=4096,ysize=4096)
     #DarkCurrent(filename=os.getenv('IS_DIR')+'/IS/data/DarkCurrent/DarkCurrent_vis.fits',Type='gaussian',mean=0.006,xsize=4096,ysize=4096)
-    Flat(filename=os.getenv('ImSimpy_DIR')+'/ImSimpy/data/FlatField/FlatField_vis.fits',floor=1,xsize=4096, ysize=4096)
-    Bias(filename=os.getenv('ImSimpy_DIR')+'/ImSimpy/data/Bias/Bias_vis.fits',xsize=4096, ysize=4096)
+    Flat(filename=path+'/data/FlatField/FlatField_vis.fits',floor=1,xsize=4096, ysize=4096)
+    Bias(filename=path+'/data/Bias/Bias_vis.fits',xsize=4096, ysize=4096)
 
 
 
     # NIR
-    Vignetting(filename=os.getenv('ImSimpy_DIR')+'/ImSimpy/data/Vignetting/Vignetting_nir.fits',floor=1,xsize=2048, ysize=2048)
-    Offset(filename=os.getenv('ImSimpy_DIR')+'/ImSimpy/data/Offset/Offset_nir.fits',xsize=2048, ysize=2048)
-    GainMap(filename=os.getenv('ImSimpy_DIR')+'/ImSimpy/data/GainMap/Gain_nir.fits',Type='random',mean=1.3,std=0.05,Nampl=32,xsize=2048,ysize=2048)
+    Vignetting(filename=path+'/data/Vignetting/Vignetting_nir.fits',floor=1,xsize=2048, ysize=2048)
+    Offset(filename=path+'/data/Offset/Offset_nir.fits',xsize=2048, ysize=2048)
+    GainMap(filename=path+'/data/GainMap/Gain_nir.fits',Type='random',mean=1.3,std=0.05,Nampl=32,xsize=2048,ysize=2048)
     #DarkCurrent(filename=os.getenv('IS_DIR')+'/IS/data/DarkCurrent/DarkCurrent_nir.fits',Type='gaussian',mean=0.002,xsize=2048,ysize=2048)
-    Flat(filename=os.getenv('ImSimpy_DIR')+'/ImSimpy/data/FlatField/FlatField_nir.fits',floor=1,xsize=2048, ysize=2048)
-    Bias(filename=os.getenv('ImSimpy_DIR')+'/ImSimpy/data/Bias/Bias_nir.fits',xsize=2048, ysize=2048)
+    Flat(filename=path+'/data/FlatField/FlatField_nir.fits',floor=1,xsize=2048, ysize=2048)
+    Bias(filename=path+'/data/Bias/Bias_nir.fits',xsize=2048, ysize=2048)
 

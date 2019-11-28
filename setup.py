@@ -23,7 +23,7 @@ requirements = [
         'numexpr',
         'scikit-image',
         'hjson',
-        'astroquery==0.3.5',
+        'astroquery',
         'pyregion',
         'cython',
         'pytest']

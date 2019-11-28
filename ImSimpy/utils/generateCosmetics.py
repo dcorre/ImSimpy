@@ -12,11 +12,13 @@ A simple script to generate a random location cosmetics map.
 import os, datetime
 import numpy as np
 from astropy.io import fits
+import imp
 
 __version__ = 1.0
 
+_, path, _ = imp.find_module('ImSimpy')
 
-def HotPixs(filename=os.getenv('ImSimpy_DIR')+'/ImSimpy/data/Cosmetics/HotPixs_vis.fits', Type='random',hotpixels=500, hotmin=70000,hotmax=300000,xsize=4096, ysize=4096):
+def HotPixs(filename=path+'/data/Cosmetics/HotPixs_vis.fits', Type='random',hotpixels=500, hotmin=70000,hotmax=300000,xsize=4096, ysize=4096):
     """
     Generates a map of hot pixels with random locations.
 
@@ -55,7 +57,7 @@ def HotPixs(filename=os.getenv('ImSimpy_DIR')+'/ImSimpy/data/Cosmetics/HotPixs_v
     hdu.writeto(filename,overwrite=True)
 
 
-def DeadPixs(filename=os.getenv('ImSimpy_DIR')+'/ImSimpy/data/Cosmetics/DeadPixs_vis.fits', Type='random',deadpixels=2000, xsize=4096, ysize=4096):
+def DeadPixs(filename=path+'/data/Cosmetics/DeadPixs_vis.fits', Type='random',deadpixels=2000, xsize=4096, ysize=4096):
     """
     Generates a map of hot pixels with random locations.
 
@@ -98,17 +100,17 @@ def makeCosmetics(output_dir='Calibration/COLIBRI/',suffix=['_vis','_nir'],xsize
     from ImSimpy.utils.generateCosmetics import HotPixs, DeadPixs
 
     for i in range(len(suffix)):
-        HotPixs(filename=os.getenv('ImSimpy_DIR')+'/ImSimpy/data/Cosmetics/%s/HotPixs%s.fits' % (output_dir,suffix[i]), xsize=xsize[i],ysize=ysize[i],Type='random',hotpixels=hotpixels[i],hotmin=hotmin[i],hotmax=hotmax[i])
+        HotPixs(filename=path+'/data/Cosmetics/%s/HotPixs%s.fits' % (output_dir,suffix[i]), xsize=xsize[i],ysize=ysize[i],Type='random',hotpixels=hotpixels[i],hotmin=hotmin[i],hotmax=hotmax[i])
 
-        DeadPixs(filename=os.getenv('ImSimpy_DIR')+'/ImSimpy/data/Cosmetics/%s/DeadPixs%s.fits' % (output_dir,suffix[i]), xsize=xsize[i],ysize=ysize[i],Type='random',deadpixels=deadpixels[i])
+        DeadPixs(filename=path+'/data/Cosmetics/%s/DeadPixs%s.fits' % (output_dir,suffix[i]), xsize=xsize[i],ysize=ysize[i],Type='random',deadpixels=deadpixels[i])
     
     
 if __name__ == '__main__':
 
     #Visible
-    HotPixs(filename=os.getenv('ImSimpy_DIR')+'/ImSimpy/data/Cosmetics/HotPixs_vis.fits', Type='random',hotpixels=500, hotmin=70000,hotmax=300000,xsize=4096, ysize=4096)
-    DeadPixs(filename=os.getenv('ImSimpy_DIR')+'/ImSimpy/data/Cosmetics/DeadPixs_vis.fits', Type='random',deadpixels=2000, xsize=4096, ysize=4096)
+    HotPixs(filename=path+'/data/Cosmetics/HotPixs_vis.fits', Type='random',hotpixels=500, hotmin=70000,hotmax=300000,xsize=4096, ysize=4096)
+    DeadPixs(filename=path+'/data/Cosmetics/DeadPixs_vis.fits', Type='random',deadpixels=2000, xsize=4096, ysize=4096)
 
     #NIR
-    HotPixs(filename=os.getenv('ImSimpy_DIR')+'/ImSimpy/data/Cosmetics/HotPixs_nir.fits', Type='random',hotpixels=500, hotmin=5000,hotmax=40000,xsize=2048, ysize=2048)
-    DeadPixs(filename=os.getenv('ImSimpy_DIR')+'/ImSimpy/data/Cosmetics/DeadPixs_nir.fits', Type='random',deadpixels=500, xsize=2048, ysize=2048)
+    HotPixs(filename=path+'/data/Cosmetics/HotPixs_nir.fits', Type='random',hotpixels=500, hotmin=5000,hotmax=40000,xsize=2048, ysize=2048)
+    DeadPixs(filename=path+'/data/Cosmetics/DeadPixs_nir.fits', Type='random',deadpixels=500, xsize=2048, ysize=2048)
