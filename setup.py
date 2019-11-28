@@ -13,9 +13,20 @@ with open('HISTORY.rst') as history_file:
 
 # cython is required for scikit-image
 # pytest is required for astroquery
-requirements = ['Click>=6.0', 'numpy', 'scipy', 'matplotlib', 'astropy',
-                'jupyter', 'numexpr', 'scikit-image', 'hjson',
-                'astroquery==0.3.5', 'pyregion', 'cython', 'pytest']
+requirements = [
+        'Click>=6.0',
+        'numpy',
+        'scipy',
+        'matplotlib',
+        'astropy',
+        'jupyter',
+        'numexpr',
+        'scikit-image',
+        'hjson',
+        'astroquery==0.3.5',
+        'pyregion',
+        'cython',
+        'pytest']
 
 setup_requirements = ['pytest-runner']
 
@@ -48,7 +59,7 @@ setup(
     include_package_data=True,
     keywords='ImSimpy',
     name='ImSimpy',
-    packages=find_packages(include=['ImSimpy']),
+    packages=find_packages(),
     setup_requires=setup_requirements,
     test_suite='tests',
     tests_require=test_requirements,
