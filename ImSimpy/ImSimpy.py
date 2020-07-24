@@ -145,6 +145,7 @@ class ImageSimulator():
 
         if self.config['object_type'] == 'grb_sim':
             self.config['grb_mag']=etc_info.information['mag']
+            self.config['SNR']=etc_info.information['SNR']
 
     def processConfigs(self):
         """

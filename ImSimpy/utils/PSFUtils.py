@@ -298,6 +298,11 @@ def convolvePSF(filename1='moffat_1024_J_s30.fits',filename2='PSF_J_ideal.fits',
        #If convoltuion from astropy
        data3 = convolution(data1,data2,allow_huge=True)
    """
+
+
+   data1 = np.array(data1, dtype=float)
+   data2 = np.array(data2, dtype=float)
+
    data3 = convolution(data1,data2,mode='same')
 
    mask = data3 < 0
