@@ -24,7 +24,7 @@ requirements = [
         'numexpr',
         'hjson',
         # astroquery 0.4.2 fails on python 3.6
-        'astroquery<0.4.2',
+        'astroquery',
         'pyregion',
         'cython',
         'pyGRBaglow',

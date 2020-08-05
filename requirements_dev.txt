@@ -13,4 +13,3 @@ pytest-runner
 pytest-cov
 numpy
 cython
-
