@@ -30,7 +30,7 @@ requirements = [
         'pyGRBaglow',
         'pyETC']
 
-setup_requirements = ['pytest-runner']
+setup_requirements = ['pytest-runner', 'numpy', 'cython']
 
 test_requirements = ['pytest', ]
 
