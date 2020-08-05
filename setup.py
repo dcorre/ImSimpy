@@ -16,21 +16,20 @@ with open('HISTORY.rst') as history_file:
 requirements = [
         'Click>=6.0',
         'numpy',
-        'scipy',
         'matplotlib',
+        'scipy',
         'astropy',
         'jupyter',
-        'numexpr',
         'scikit-image',
+        'numexpr',
         'hjson',
         'astroquery',
         'pyregion',
         'cython',
-        'pytest',
         'pyGRBaglow',
         'pyETC']
 
-setup_requirements = ['pytest-runner', 'numpy', 'cython']
+setup_requirements = ['pytest-runner', 'numpy']
 
 test_requirements = ['pytest', ]
 
