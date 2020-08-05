@@ -5,7 +5,7 @@
 
 from setuptools import setup, find_packages
 
-with open('README.rst') as readme_file:
+with open('README.md') as readme_file:
     readme = readme_file.read()
 
 with open('HISTORY.rst') as history_file:
@@ -16,19 +16,21 @@ with open('HISTORY.rst') as history_file:
 requirements = [
         'Click>=6.0',
         'numpy',
-        'scipy',
         'matplotlib',
+        'scipy',
         'astropy',
         'jupyter',
-        'numexpr',
         'scikit-image',
+        'numexpr',
         'hjson',
+        # astroquery 0.4.2 fails on python 3.6
         'astroquery',
         'pyregion',
         'cython',
-        'pytest']
+        'pyGRBaglow',
+        'pyETC']
 
-setup_requirements = ['pytest-runner']
+setup_requirements = ['pytest-runner', 'numpy']
 
 test_requirements = ['pytest', ]
 
@@ -37,15 +39,14 @@ setup(
     author_email='david.corre.fr@gmail.com',
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
-        'Intended Audience :: Developers',
+        'Topic :: Scientific/Engineering :: Astronomy',
+        'Intended Audience :: Science/Research',
         'License :: OSI Approved :: MIT License',
         'Natural Language :: English',
-        "Programming Language :: Python :: 2",
-        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
     ],
     description="Image Simulator for optical/NIR telescope",
     entry_points={
@@ -55,7 +56,7 @@ setup(
     },
     install_requires=requirements,
     license="MIT license",
-    long_description=readme + '\n\n' + history,
+    long_description=readme,
     include_package_data=True,
     keywords='ImSimpy',
     name='ImSimpy',
