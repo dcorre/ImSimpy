@@ -23,7 +23,8 @@ requirements = [
         'scikit-image',
         'numexpr',
         'hjson',
-        'astroquery',
+        # astroquery 0.4.2 fails on python 3.6
+        'astroquery<0.4.2',
         'pyregion',
         'cython',
         'pyGRBaglow',

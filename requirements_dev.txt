@@ -11,11 +11,6 @@ twine
 pytest
 pytest-runner
 pytest-cov
-matplotlib
-numpy
-scipy
-scikit-image
-astropy
-jupyter
+
 cython
 
