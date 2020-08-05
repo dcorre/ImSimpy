@@ -11,6 +11,6 @@ twine
 pytest
 pytest-runner
 pytest-cov
-
+numpy
 cython
 
