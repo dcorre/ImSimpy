@@ -9,7 +9,7 @@ Development status
 
 [![Build Status](https://travis-ci.com/dcorre/ImSimpy.svg?branch=master)](https://travis-ci.com/dcorre/ImSimpy)
 [![codecov](https://codecov.io/gh/dcorre/ImSimpy/branch/master/graphs/badge.svg)](https://codecov.io/gh/dcorre/ImSimpy/branch/master)
-[![Documentation Status](https://readthedocs.org/projects/ImSimpy/badge/?version=latest)](https://ImSimpy.readthedocs.io/en/latest/?badge=latest)
+[![Documentation Status](https://readthedocs.org/projects/imsimpy/badge/?version=latest)](https://imsimpy.readthedocs.io/en/latest/?badge=latest)
 
 
 
